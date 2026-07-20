@@ -22,7 +22,6 @@ PokeAtlas is a modern, responsive, and feature-rich Pokémon encyclopedia (Poké
 - **Styling**: Tailwind CSS, CSS Variables
 - **Animations**: Framer Motion
 - **Icons**: React Icons
-- **Data Source**: PokeAPI
 
 ## Getting Started
 
