@@ -6,3 +6,5 @@ out
 npm-debug.log*
 tsconfig.tsbuildinfo
 .config/
+
+.vercel
