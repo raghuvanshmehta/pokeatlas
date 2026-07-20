@@ -1,0 +1,9 @@
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { FiArrowUpRight } from "react-icons/fi";
+import { RegionInfo } from "@/types";
+import { pokemonSprite, POKEMON_IDS } from "@/constants";
+import { formatName } from "@/lib/utils";
+export function RegionCard({ region, index }: { region: RegionInfo; index: number }) { return <motion.article whileHover={{ y: -5 }} className="overflow-hidden rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface-solid)] shadow-card"><div className="relative h-32 overflow-hidden p-5" style={{ background: `linear-gradient(120deg, ${region.color}, #171d3233)` }}><div className="absolute -right-8 -top-14 h-48 w-48 rounded-full border-[20px] border-white/15" /><p className="relative text-xs font-bold uppercase tracking-[.18em] text-white/75">{region.generation}</p><div className="relative mt-2 flex items-center justify-between"><h2 className="font-display text-3xl font-bold text-white">{region.name}</h2><span className="font-mono text-sm font-bold text-white/60">0{index + 1}</span></div></div><div className="p-5"><p className="font-display text-lg font-bold">{region.tagline}</p><p className="mt-2 text-sm leading-6 text-[var(--muted)]">{region.description}</p><div className="mt-5 flex items-center justify-between"><div className="flex -space-x-2">{region.starters.map((starter) => <Link href={`/pokemon/${starter}`} key={starter} title={formatName(starter)} className="relative grid h-10 w-10 place-items-center rounded-full border-2 border-[var(--surface-solid)] bg-[var(--bg)]"><Image src={pokemonSprite(POKEMON_IDS[starter] ?? starter)} alt={formatName(starter)} width={36} height={36} unoptimized /></Link>)}</div><Link href={`/regions#${region.name.toLowerCase()}`} className="inline-flex items-center gap-1 text-xs font-bold text-[#e85d68]">View starters <FiArrowUpRight /></Link></div></div></motion.article>; }

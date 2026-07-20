@@ -1,0 +1,7 @@
+"use client";
+import { FiMap } from "react-icons/fi";
+import { REGIONS } from "@/constants";
+import { PageTransition } from "@/components/page-transition";
+import { RegionCard } from "@/components/region-card";
+import { RegionDetail } from "@/components/region-detail";
+export default function RegionsPage() { return <PageTransition><main className="container-shell py-12 sm:py-16"><div className="max-w-2xl"><div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#edf9eb] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[.17em] text-[#4c9c44] dark:bg-[#203b28]"><FiMap /> A world to wander</div><h1 className="page-heading font-display text-5xl font-bold sm:text-6xl">The regions</h1><p className="mt-4 prose-copy">Nine distinct places, each with its own rhythm, legends and first partners. Pick a destination and start mapping your journey.</p></div><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{REGIONS.map((region, index) => <RegionCard key={region.name} region={region} index={index} />)}</div><div className="mt-16 space-y-8"><div className="flex items-end justify-between"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-[#e85d68]">Travel notes</p><h2 className="mt-2 font-display text-3xl font-bold">Plan your route</h2></div><span className="text-sm font-semibold text-[var(--muted)]">{REGIONS.length} regions</span></div>{REGIONS.map((region) => <RegionDetail key={region.name} region={region} />)}</div></main></PageTransition>; }

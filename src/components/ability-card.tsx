@@ -1,0 +1,9 @@
+"use client";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FiArrowUpRight } from "react-icons/fi";
+import { AbilityDetail, NamedAPIResource } from "@/types";
+import { formatName } from "@/lib/utils";
+import { pokemonSprite } from "@/constants";
+import Image from "next/image";
+export function AbilityCard({ ability, compact = false }: { ability: AbilityDetail | NamedAPIResource; compact?: boolean }) { const detail = "effect_entries" in ability; const description = detail ? ability.effect_entries.find((entry) => entry.language.name === "en")?.short_effect : "Explore how this ability shapes a Pokémon in battle."; const pokemon = detail ? ability.pokemon.slice(0, compact ? 5 : 8) : []; return <motion.article whileHover={{ y: -4 }} className="rounded-2xl border border-[var(--line)] bg-[var(--surface-solid)] p-5 shadow-card"><div className="flex items-start justify-between gap-3"><div><p className="text-[10px] font-bold uppercase tracking-[.18em] text-[#8273e8]">Ability</p><h3 className="mt-1 font-display text-xl font-bold capitalize">{formatName(ability.name)}</h3></div><Link href={`/abilities?ability=${ability.name}`} aria-label={`Open ${ability.name}`} className="grid h-8 w-8 place-items-center rounded-full bg-[var(--bg)] text-[var(--muted)]"><FiArrowUpRight /></Link></div><p className="mt-3 min-h-[48px] text-sm leading-6 text-[var(--muted)]">{description}</p>{detail && pokemon.length > 0 && <div className="mt-4 flex -space-x-2">{pokemon.map(({ pokemon: item }) => <Link key={item.name} href={`/pokemon/${item.name}`} title={formatName(item.name)} className="grid h-9 w-9 place-items-center overflow-hidden rounded-full border-2 border-[var(--surface-solid)] bg-[var(--bg)]"><Image src={pokemonSprite(item.url.split("/").filter(Boolean).pop() ?? "1")} alt={formatName(item.name)} width={32} height={32} unoptimized /></Link>)}</div>}</motion.article>; }

@@ -1,0 +1,4 @@
+"use client";
+import { useEffect, useState } from "react";
+import { FiCheck, FiCopy, FiShare2 } from "react-icons/fi";
+export function ShareButton({ title }: { title: string }) { const [copied, setCopied] = useState(false); const [canShare, setCanShare] = useState(false); useEffect(() => setCanShare(Boolean(navigator.share)), []); const share = async () => { const url = window.location.href; if (navigator.share) { try { await navigator.share({ title, url }); } catch { /* User dismissed the share sheet. */ } } else { await navigator.clipboard?.writeText(url); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } }; return <button onClick={share} className="inline-flex items-center gap-2 rounded-xl border border-[var(--line)] px-4 py-2.5 text-sm font-bold transition hover:border-[#55c7e8]">{copied ? <FiCheck className="text-[#63bd58]" /> : canShare ? <FiShare2 /> : <FiCopy />} {copied ? "Copied" : "Share"}</button>; }

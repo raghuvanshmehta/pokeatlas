@@ -1,0 +1,4 @@
+"use client";
+import { useEffect, useState } from "react";
+import { FiMoon, FiSun } from "react-icons/fi";
+export function ThemeToggle() { const [dark, setDark] = useState(false); useEffect(() => { const saved = localStorage.getItem("pokeatlas-theme"); const isDark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches; document.documentElement.classList.toggle("dark", isDark); setDark(isDark); }, []); const toggle = () => { const next = !dark; setDark(next); document.documentElement.classList.toggle("dark", next); localStorage.setItem("pokeatlas-theme", next ? "dark" : "light"); }; return <button aria-label={dark ? "Switch to light mode" : "Switch to dark mode"} onClick={toggle} className="grid h-10 w-10 place-items-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-lg transition hover:-translate-y-0.5 hover:border-[#e85d68]">{dark ? <FiSun /> : <FiMoon />}</button>; }
